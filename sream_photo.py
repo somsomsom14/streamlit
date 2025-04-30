@@ -13,14 +13,6 @@ st.set_page_config(
 st.title("📚PHOTO BOOK")
 st.markdown("사진을 하나씩 등록해보세요!🌞")
 
-def load_and_resize(image_path, target_width, target_height):
-    if image_path.startswith("http"):  # URL이면 requests로 불러오기
-        response = requests.get(image_path)
-        img = Image.open(BytesIO(response.content)).convert("RGB")
-    else:
-        img = Image.open(image_path).convert("RGB")  # 로컬 이미지
-    img = img.resize((target_width, target_height))
-    return np.array(img)
 
 type_list =["인물🙋🏻", "풍경⛰️", "여행🧳", "접사🌷", "패션👚", "음식🍰", "거리🛣️", "스포츠⚽️", "연예인💃", "기타✨"]
 initial_photo =[
