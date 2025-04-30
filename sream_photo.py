@@ -77,7 +77,7 @@ with st.form(key="form"):
         )
     with col2:
         types = st.multiselect(
-            label="사진 종류",
+            label="사진 종류", 
             options=type_list,
             max_selections=2,
             default= example_photo['types'] if auto_complete else []
