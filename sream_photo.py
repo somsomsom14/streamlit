@@ -1,9 +1,5 @@
 import streamlit as st
-from PIL import Image
-import numpy as np
-import streamlit as st
-import requests
-from io import BytesIO
+
 
 print("hello")
 st.set_page_config(
@@ -13,33 +9,26 @@ st.set_page_config(
 st.title("📚PHOTO BOOK")
 st.markdown("사진을 하나씩 등록해보세요!🌞")
 
-def load_and_resize(image_path, target_width, target_height):
-    if image_path.startswith("http"):  # URL이면 requests로 불러오기
-        response = requests.get(image_path)
-        img = Image.open(BytesIO(response.content)).convert("RGB")
-    else:
-        img = Image.open(image_path).convert("RGB")  # 로컬 이미지
-    img = img.resize((target_width, target_height))
-    return np.array(img)
+
 
 type_list =["인물🙋🏻", "풍경⛰️", "여행🧳", "접사🌷", "패션👚", "음식🍰", "거리🛣️", "스포츠⚽️", "연예인💃", "기타✨"]
 initial_photo =[
     {
         "name":"케이크",
         "types":["음식🍰"],
-        "image_url":"https://i.namu.wiki/i/htTi1XgAj12M-217ZlFTvT2xfXNk4v5FDWstL-C24oiy3ZbZOEGIelCJPHi2hvoEMAHmyCBhsfW__h4hAYj_gLclTg03pcWma1I4-yjtHrHyHmSvLl4akS0I-drR0-W58_A4j7JMGz1Xm0usrrLYWQ.webp",
+        "image_url":"https://i.namu.wiki/i/vj8Dr4V8TXnEdhm004XIVI43a36zgMpny_CoZNo7dM80EsY0DNV5jB1HlJXj7OV4wA2V4mldJGluJsHHD2uSmrs9qEDg2UtzLk9ODiSco11A0eYs8DnbdhNiXphgM2yOzDyzYQRvB2HjyuMcsNXJGA.webp",
         "date":"2023"
     },
     {
         "name":"나비",
         "types":["접사🌷"],
-        "image_url":"https://image.kr.canon/pds/editor/images/000019/20161114163703522_LO1LUXC1.png",
+        "image_url":"https://i.namu.wiki/i/CJMe7fnj4jdjaKF0zgeaLka3xO-jryTPl05WttImvGmDip47KBYRBi_O8hoj0M6xuPtskKs5F7kbc1uhYhs1UmCl4ROCRjyxYfKfODTQMUOvw8VpNv6ySlOhBo_p3n8QImVRgDvO9U1SOCrXwp_tAw.webp",
         "date":"2024"
     },
     {
         "name":"제주도",
         "types":["풍경⛰️"],
-        "image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR45n-koxI6aeoPOFXk7Zv-xxRUH63g3cQy5w&s",
+        "image_url":"https://i.namu.wiki/i/-0JT8Q9ta2xhOIZdDhchSQH0PEG3IEZbVRxsaDniEKjb-yww5EPJ8xrrV738jD0_5L1Wzooxan2C1TegJkh8XuISvF2ifUCFK-DeTzRYSSoTGm9xhmPpnRsvVfpA1z-qtIRXslYXrC-oFjHWBI2D6Q.jpg",
         "date":"2025"
     },
     {
@@ -113,8 +102,7 @@ for i in range(0, len(st.session_state.photo), 4):
         with cols[j]:
             photo = row_photo[j]
             with st.expander(label= f"**{i+j+1}.{photo['name']}**", expanded=True):
-                img = load_and_resize(photo["image_url"],300,200)
-                st.image(img)
+                st.image(photo["image_url"])
                 types = [f"{x}" for x in photo["types"]]
                 st.badge(" / ".join(types))
                 st.caption(f"연도: {photo['date']}")
@@ -123,4 +111,3 @@ for i in range(0, len(st.session_state.photo), 4):
                     print("delete button clicked")
                     del st.session_state.photo[i+j]
                     st.rerun()
-            st.divider()
