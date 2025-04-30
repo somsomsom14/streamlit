@@ -105,8 +105,8 @@ for i in range(0, len(st.session_state.photo), 4):
         with cols[j]:
             photo = row_photo[j]
             with st.expander(label= f"**{i+j+1}.{photo['name']}**", expanded=True):
-                img = photo["image_url"],300,200
-                st.image(img)
+                st.image(photo["image_url"], width=200)
+                
                 types = [f"{x}" for x in photo["types"]]
                 st.badge(" / ".join(types))
                 st.caption(f"연도: {photo['date']}")
