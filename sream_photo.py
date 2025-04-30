@@ -25,7 +25,7 @@ initial_photo =[
     {
         "name":"나비",
         "types":["접사🌷"],
-        "image_url":"./images/nabo.png",
+        "image_url":"./images/nabi.png",
         "date":"2024"
     },
     {
